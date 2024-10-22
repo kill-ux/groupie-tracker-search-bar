@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artistes</title>
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script>
+      function updateRange(){
+        let FromCreationDate = document.getElementsByName('FromCreationDate')[0]
+        let ToCreationDate = document.getElementsByName('ToCreationDate')[0]
+        let FromFirsetAlbum = document.getElementsByName('FromFirsetAlbum')[0]
+        let ToFirsetAlbum = document.getElementsByName('ToFirsetAlbum')[0]
+        if (FromCreationDate.value > ToCreationDate.value){
+          ToCreationDate.value = FromCreationDate.value
+        }
+        if (FromFirsetAlbum.value > ToFirsetAlbum.value){
+          ToFirsetAlbum.value = FromFirsetAlbum.value
+        }
+        document.getElementById('value1').textContent = FromCreationDate.value
+        document.getElementById('value2').textContent = ToCreationDate.value
+        document.getElementById('FirsetAlbumvalue1').textContent = FromFirsetAlbum.value
+        document.getElementById('FirsetAlbumvalue2').textContent = ToFirsetAlbum.value
+      }
+    </script>
+  </head>
+  <body>
+    <form action="/" method="get" class="search">
+      <input type="search" list="list" name="keyword" >
+      <datalist id="list">
+        {{ range $data , $type := .DataList }}
+           <option value="{{$data}}">{{$data}}{{$type}}</option>
+        {{ end }}
+      </datalist>
+      <input type="submit" value="Search" name="Search">
+    </form>
+    <h1>Groupie Tracker</h1>
+    <div class="divDetails">
+      <details class="detailsForm">
+        <summary>Filters</summary>
+        <form class="filterForm" action="/" method="get">
+          <div>
+            <label for="">CreationDate</label>
+          </div>
+          <div class="rangeGroup">
+            <label for="">From :</label>
+            <input
+              type="range"
+              name="FromCreationDate"
+              id="range1"
+              min="1900"
+              max="2025"
+              value="1950"
+              oninput="updateRange()"
+            />
+            <span id="value1">1950</span>
+          </div>
+          <div class="rangeGroup">
+            <label for="">To :</label>
+
+            <input
+              type="range"
+              name="ToCreationDate"
+              id="range2"
+              min="1900"
+              max="2025"
+              value="2024"
+              oninput="updateRange()"
+            />
+            <span id="value2">2024</span>
+          </div>
+          
+            <div>
+              <hr class="hr">
+            </div>
+          
+          <div>
+            <label for="">FirsetAlbum </label>
+          </div>
+         
+          <div class="rangeGroup">
+            <label for="">From :</label>
+            <input
+              type="range"
+              name="FromFirsetAlbum"
+              id="FromFirsetAlbum"
+              min="1900"
+              max="2025"
+              value="1950"
+              oninput="updateRange()"
+            />
+            <span id="FirsetAlbumvalue1">1950</span>
+           
+          </div>
+          <div class="rangeGroup">
+            <label for="">To :</label>
+            <input
+            type="range"
+            name="ToFirsetAlbum"
+            id="ToFirsetAlbum"
+            min="1900"
+            max="2025"
+            value="2024"
+            oninput="updateRange()"
+          />
+          <span id="FirsetAlbumvalue2">2024</span>  
+          </div>
+          <div>
+            <hr class="hr">
+          </div>
+          <div>
+            <label for="">Members :  </label>
+            <label for="1">1</label>
+            <input type="checkbox" name="members" id="1" value="1" />
+
+            <label for="2">2</label>
+            <input type="checkbox" name="members" id="2" value="2" />
+
+            <label for="3">3</label>
+            <input type="checkbox" name="members" id="3" value="3" />
+
+            <label for="4">4</label>
+            <input type="checkbox" name="members" id="4" value="4" />
+
+            <label for="5">5</label>
+            <input type="checkbox" name="members" id="5" value="5" />
+
+            <label for="6">6</label>
+            <input type="checkbox" n{.Name}ame="members" id="6" value="6" />
+
+            <label for="7">7</label>
+            <input type="checkbox" name="members" id="7" value="7" />
+            <label for="8">8</label>
+            <input type="checkbox" name="members" id="8" value="8" />
+          </div>
+
+          <div>
+            <label for="">Locations : </label>
+            <input type="text" name="local" id="local" />
+          </div>
+          <div class="btns">
+            <input type="submit" name="filter" value="Filter" />
+            <a href="/">Reset</a>
+          </div>
+        </form>
+      </details>
+    </div>
+    <div class="cards">
+      {{ range .Filters }}
+      <div class="card" id="{{.Id}}">
+        <a class="hrefArtist" href="/artist/{{.Id}}">
+          <img class="image" src="{{.Image}}" alt="" />
+          <h3 class="name">{{.Name}}</h3>
+          <p class="CreationDate">
+            CreationDate: <span class="date">{{.CreationDate}}</span>
+          </p>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    <script>
+      updateRange()
+    </script>
+  </body>
+</html>
