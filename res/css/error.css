@@ -6,7 +6,11 @@
     height: 100vh;
 }
 
-span{
+a{
     color: royalblue;
-    text-decoration:underline;
+    text-decoration: underline;
 }
+p{
+    font-family:sans-serif ;
+}
+

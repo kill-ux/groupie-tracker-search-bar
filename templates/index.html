@@ -29,11 +29,11 @@
     <form action="/" method="get" class="search">
       <input type="search" list="list" name="keyword" >
       <datalist id="list">
-        {{ range $data , $type := .DataList }}
+        {{ range $data , $type := .DataList }}Filter
            <option value="{{$data}}">{{$data}}{{$type}}</option>
         {{ end }}
       </datalist>
-      <input type="submit" value="Search" name="Search">
+      <input type="submit" value="Search" name="action">
     </form>
     <h1>Groupie Tracker</h1>
     <div class="divDetails">
@@ -140,7 +140,7 @@
             <input type="text" name="local" id="local" />
           </div>
           <div class="btns">
-            <input type="submit" name="filter" value="Filter" />
+            <input type="submit" name="action" value="Filter" />
             <a href="/">Reset</a>
           </div>
         </form>
@@ -153,7 +153,7 @@
           <img class="image" src="{{.Image}}" alt="" />
           <h3 class="name">{{.Name}}</h3>
           <p class="CreationDate">
-            CreationDate: <span class="date">{{.CreationDate}}</span>
+            CreationDate: filter<span class="date">{{.CreationDate}}</span>
           </p>
         </a>
       </div>
